@@ -17,18 +17,22 @@ class XlsController {
 
     def index() {
 
-        if(params.sheet){
-            if( params.row ){
-                respond xlsService.getRow(params.sheet, params.row as int)
-            }else{
-                respond xlsService.sheets.find{ it.name == params.sheet }
-            }
-
-
-        }else {
+        if(!params.sheet) {
             respond sheets: xlsService.sheets
+            return
         }
 
+        if( !params.row ) {
+            respond xlsService.sheets.find{ it.name == params.sheet }
+            return
+        }
+
+        if( !params.col ) {
+            respond xlsService.getRow(params.sheet, params.row as int)
+            return
+        }
+
+        respond xlsService.getCol(params.sheet, params.row as int, params.col as int)
     }
 
 }

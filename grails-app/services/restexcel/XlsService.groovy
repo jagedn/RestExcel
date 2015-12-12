@@ -27,7 +27,7 @@ class XlsService {
         wb = WorkbookFactory.create(inputStream);
         wb.sheetIterator().each {sheet->
             Row firstRow = sheet.getRow(0)
-            SheetBean add = new SheetBean(name: sheet.sheetName, rows:sheet.lastRowNum-1, cols : firstRow.lastCellNum, headers:firstRow.cellIterator()*.stringCellValue)
+            SheetBean add = new SheetBean(name: sheet.sheetName, rows:sheet.lastRowNum, cols : firstRow.lastCellNum, headers:firstRow.cellIterator()*.stringCellValue)
             sheets.add add
         }
         sheets
@@ -47,33 +47,34 @@ class XlsService {
         (0..bean.cols).each{ idx->
             Cell cell = row.getCell(idx)
             if( cell ){
-                CellBean add = new CellBean(row:rowNumber,cell:idx,value:cell2value(cell))
+                CellBean add = new CellBean(row:rowNumber,cell:idx+1,value:cell2value(cell))
                 ret.add add
             }
         }
         ret
     }
 
-    String cell2value(Cell cell){
+    public CellBean getCol( String sheetName, int rowNumber, int colNumber){
+        List<CellBean> row = getRow( sheetName, rowNumber)
+        if( !row )
+            return null
+        row.find{ it.cell == colNumber }
+    }
+
+    static String cell2value(Cell cell){
         switch (cell.cellType){
-            case Cell.CELL_TYPE_BLANK:
-                return ''
-                break
             case Cell.CELL_TYPE_BOOLEAN:
                 return "$cell.booleanCellValue".toString()
-                break
             case Cell.CELL_TYPE_ERROR:
                 return "$cell.errorCellValue".toString()
-                break
             case Cell.CELL_TYPE_FORMULA:
                 return "$cell.cellFormula".toString()
-                break
             case Cell.CELL_TYPE_NUMERIC:
                 return "$cell.numericCellValue".toString()
-                break
             case Cell.CELL_TYPE_STRING:
                 return "$cell.stringCellValue".toString()
-                break
+            default:
+                return ''
         }
     }
 

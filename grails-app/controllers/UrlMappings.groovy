@@ -2,7 +2,7 @@ class UrlMappings {
 
     static mappings = {
 
-        "/xls/$sheet/$row?(.$format)?"(controller:'xls'){
+        "/xls?/$sheet?/$row?/$col?(.$format)?"(controller:'xls'){
             constraints{
                // row(validator: it.isInteger())
             }
