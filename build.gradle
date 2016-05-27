@@ -113,3 +113,9 @@ war {
         into 'static/docs'
     }
 }
+
+task publish(type: GradleBuild) {
+    dependsOn 'war'
+    buildFile = 'publish.gradle'
+    tasks = ['publishGhPages']
+}
