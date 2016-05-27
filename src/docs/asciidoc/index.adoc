@@ -1,0 +1,88 @@
+= RestExcel
+Put your Microsoft Excel files behind a REST service
+Jorge Aguilera;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[introduction]
+= Introducción
+
+RestExcel es una app Grails que te permite ofrecer un Excel como servicio RESTfull. Simplemente configura la app
+indicándo dónde se encuentra el fichero y al arrancar tus clientes podrán realizar operaciones REST sobre él.
+
+[[overview-http-verbs]]
+== HTTP verbs
+
+RestExcel intenta cumplir el standard HTTP y las convenciones sobre verbos de REST al máximo
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to update an existing resource, overwrites all fields
+
+| `PATCH`
+| Used for partial updates to an existing resource
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+[[overview-http-status-codes]]
+== HTTP status codes
+
+RestExcel intenta cumplir el standard HTTP y las convenciones sobre códigos de retorno de REST al máximo
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+
+| `405 Method Not Allowed`
+| The type of request for this resource is not allowed. For example, some endpoints may be GET only.
+Trying a POST will return this message.
+
+| `422 Unprocessable Entity`
+| There was an error in the request. The response body will contain the error message.
+|===
+
+[[overview-errors]]
+== Errors
+
+Cuando ocurre un error (status code >= 400), el cuerpo contiene un objeto JSON que describe el problema,
+con la siguiente estructura:
+
+include::{snippets}/error-example/response-fields.adoc[]
+
+[[resources]]
+= Resources
+
+include::resources/sheets.adoc[]
+
+include::resources/row/product/rows.adoc[]
+
+

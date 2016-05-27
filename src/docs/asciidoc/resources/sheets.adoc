@@ -1,0 +1,45 @@
+[[resources-aggregates]]
+== Sheets
+
+Podemos conocer las hojas que contiene un Excel
+
+[[resources-aggregate-list]]
+=== List Sheets
+
+Una petición `GET` devuelve la lista de hojas
+
+==== Request
+
+include::{snippets}/index/curl-request.adoc[]
+
+include::{snippets}/index/httpie-request.adoc[]
+
+==== Response
+
+include::{snippets}/index/http-response.adoc[]
+
+==== Body
+
+include::{snippets}/index/response-fields.adoc[]
+
+
+[[resources-sheet-get]]
+=== Get Sheet
+
+Una petición `GET` sobre una hoja devuelve los metadatos de la hoja
+
+==== Request
+
+include::{snippets}/sheet/curl-request.adoc[]
+
+include::{snippets}/sheet/httpie-request.adoc[]
+
+include::{snippets}/sheet/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/sheet/http-response.adoc[]
+
+==== Body
+
+include::{snippets}/sheet/response-fields.adoc[]

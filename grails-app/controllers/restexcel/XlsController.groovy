@@ -18,7 +18,7 @@ class XlsController {
     def index() {
 
         if(!params.sheet) {
-            respond sheets: xlsService.sheets
+            respond xlsService.sheets
             return
         }
 

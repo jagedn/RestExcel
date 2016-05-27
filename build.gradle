@@ -14,6 +14,7 @@ buildscript {
 
 plugins {
     id "io.spring.dependency-management" version "0.5.2.RELEASE"
+    id "org.asciidoctor.convert" version "1.5.2"
 }
 
 version "0.1"
@@ -28,6 +29,9 @@ apply plugin: "org.grails.grails-web"
 ext {
     grailsVersion = project.grailsVersion
     gradleWrapperVersion = project.gradleWrapperVersion
+
+    springRestdocsVersion = '1.1.0.RC1'
+    snippetsDir = file('build/generated-snippets')
 }
 
 repositories {
@@ -71,8 +75,41 @@ dependencies {
     compile 'org.apache.poi:poi:3.13'
     compile 'org.apache.poi:poi-ooxml:3.13'
 
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile "org.springframework.restdocs:spring-restdocs-core:$springRestdocsVersion"
+    testCompile "org.springframework.restdocs:spring-restdocs-restassured:$springRestdocsVersion"
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
+}
+
+
+test {
+    outputs.dir snippetsDir
+}
+
+integrationTest{
+    outputs.upToDateWhen { false }
+    outputs.dir snippetsDir
+}
+
+asciidoctor {
+    attributes 'snippets': snippetsDir,'source-highlighter':'prettify','toc':'left','setanchors':'true'
+    inputs.dir snippetsDir
+    dependsOn integrationTest
+}
+
+jar {
+    dependsOn asciidoctor
+    from ("${asciidoctor.outputDir}/html5") {
+        into 'static/docs'
+    }
+}
+
+war {
+    dependsOn asciidoctor
+    from ("${asciidoctor.outputDir}/html5") {
+        into 'static/docs'
+    }
 }

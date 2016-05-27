@@ -1,0 +1,23 @@
+[[resources-rows]]
+== Rows
+
+Podemos conocer las filas que contiene una hoja determinada
+
+[[resources-rows-list]]
+=== List Rows
+
+Una petición `GET` devuelve las filas de la hoja
+
+==== Request
+
+include::{snippets}/row/product/curl-request.adoc[]
+
+include::{snippets}/row/product/httpie-request.adoc[]
+
+==== Response
+
+include::{snippets}/row/product/http-response.adoc[]
+
+==== Body
+
+include::{snippets}/row/product/response-fields.adoc[]

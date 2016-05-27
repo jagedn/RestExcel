@@ -7,6 +7,7 @@ class CellBean {
 
     int row
     int cell
+    String name
     String value
 
 }

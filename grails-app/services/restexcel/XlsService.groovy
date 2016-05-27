@@ -14,11 +14,6 @@ import org.apache.poi.ss.usermodel.WorkbookFactory
 @CompileStatic
 class XlsService {
 
-
-    public void init(){
-
-    }
-
     private Workbook wb
 
     List<SheetBean> sheets = []
@@ -47,7 +42,7 @@ class XlsService {
         (0..bean.cols).each{ idx->
             Cell cell = row.getCell(idx)
             if( cell ){
-                CellBean add = new CellBean(row:rowNumber,cell:idx+1,value:cell2value(cell))
+                CellBean add = new CellBean(row:rowNumber,cell:idx+1,value:cell2value(cell),name:sheet.getRow(0).getCell(idx).stringCellValue)
                 ret.add add
             }
         }
@@ -59,6 +54,25 @@ class XlsService {
         if( !row )
             return null
         row.find{ it.cell == colNumber }
+    }
+
+    public CellBean setCol( String sheetName, int rowNumber, int colNumber, value){
+        CellBean ret
+        if( rowNumber < 1 || rowNumber < 1)
+            return null
+        Sheet sheet = wb.getSheet(sheetName)
+        if( ! sheet )
+            return null
+        Row row = sheet.getRow(rowNumber)
+        if( ! row )
+            return null
+
+        Cell cell = row.getCell(colNumber-1)
+        if( !cell ){
+            cell = row.createCell(colNumber-1)
+        }
+        cell = value2cell(cell,value)
+        new CellBean(row:rowNumber,cell:colNumber,value:cell2value(cell))
     }
 
     static String cell2value(Cell cell){
@@ -76,6 +90,21 @@ class XlsService {
             default:
                 return ''
         }
+    }
+
+    static Cell value2cell( Cell cell, value ){
+        if( value instanceof Number) {
+            cell.cellType=Cell.CELL_TYPE_NUMERIC
+            cell.setCellValue(value as double)
+        }else
+            if( value instanceof Boolean) {
+                cell.cellType=Cell.CELL_TYPE_BOOLEAN
+                cell.setCellValue(value as boolean)
+            }else {
+                cell.cellType=Cell.CELL_TYPE_STRING
+                cell.setCellValue("$value".toString())
+            }
+        cell
     }
 
 }
