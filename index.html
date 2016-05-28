@@ -576,9 +576,32 @@ Trying a POST will return this message.</p></td>
 <p>Cuando ocurre un error (status code &gt;= 400), el cuerpo contiene un objeto JSON que describe el problema,
 con la siguiente estructura:</p>
 </div>
-<div class="paragraph">
-<p>Unresolved directive in index.adoc - include::/home/jorge/puravida/proyectos/RestExcel/RestExcel/build/generated-snippets/error-example/response-fields.adoc[]</p>
-</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">el codigo del error</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">una descripcion del error</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -617,7 +640,7 @@ Server: Apache-Coyote/1.1
 X-Application-Context: application:test
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Fri, 27 May 2016 14:54:36 GMT
+Date: Sat, 28 May 2016 15:45:20 GMT
 Content-Length: 124
 
 [ {
@@ -703,7 +726,7 @@ Server: Apache-Coyote/1.1
 X-Application-Context: application:test
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Fri, 27 May 2016 14:54:36 GMT
+Date: Sat, 28 May 2016 15:45:20 GMT
 Content-Length: 120
 
 {
@@ -790,7 +813,7 @@ Server: Apache-Coyote/1.1
 X-Application-Context: application:test
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Fri, 27 May 2016 14:54:36 GMT
+Date: Sat, 28 May 2016 15:45:20 GMT
 Content-Length: 370
 
 [ {
