@@ -22,8 +22,6 @@ class SheetIndexSpec extends BaseSpec{
 
         expect:
         givenRequest(documentBase("index",responseFields(fields)))
-                .when()
-                .port(8080)
                 .get("/xls")
                 .then()
                 .assertThat().statusCode(200)

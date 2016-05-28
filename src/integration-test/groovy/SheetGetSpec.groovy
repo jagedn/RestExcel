@@ -21,8 +21,6 @@ class SheetGetSpec extends BaseSpec{
 
         expect:
         givenRequest(documentBase("sheet",responseFields(fields)))
-                .when()
-                .port(8080)
                 .get("/xls/Products")
                 .then()
                 .assertThat().statusCode(200)

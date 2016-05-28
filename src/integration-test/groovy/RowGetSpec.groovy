@@ -21,8 +21,6 @@ class RowGetSpec extends BaseSpec{
 
         expect:
         givenRequest(documentBase("row/product", responseFields(fields)))
-                .when()
-                .port(8080)
                 .get("/xls/Products/1")
                 .then()
                 .assertThat().statusCode(200)
