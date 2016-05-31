@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>Sheets</title>
+<title>Cols</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -417,10 +417,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#resources-aggregates">Sheets</a>
+<li><a href="#resources-cols">Cols</a>
 <ul class="sectlevel2">
-<li><a href="#resources-aggregate-list">List Sheets</a></li>
-<li><a href="#resources-sheet-get">Get Sheet</a></li>
+<li><a href="#resources-col-get">Get Col</a></li>
 </ul>
 </li>
 </ul>
@@ -428,15 +427,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="resources-aggregates">Sheets</h2>
+<h2 id="resources-cols">Cols</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Podemos conocer las hojas que contiene un Excel</p>
-</div>
 <div class="sect2">
-<h3 id="resources-aggregate-list">List Sheets</h3>
+<h3 id="resources-col-get">Get Col</h3>
 <div class="paragraph">
-<p>Una petición <code>GET</code> devuelve la lista de hojas</p>
+<p>Una petición <code>GET</code> sobre una fila/columna devuelve el valor de la misma junto con sus metadatos</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -453,24 +449,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">[].name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">row</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">el id de la fila</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cell</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">el id de la columna</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">el id de la hoja a usar para siguientes peticiones</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">el nombre del campo (tomado de la primera fila del excel)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">[].rows</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">el numero de filas que contiene</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">[].cols</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">el numero de columnas que contiene</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">[].headers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">la primera fila de cada sheet contiene los nombres de los campos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">el valor del campo</p></td>
 </tr>
 </tbody>
 </table>
@@ -478,12 +474,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h4 id="_request">Request</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost/xls' -i -H 'Accept: application/json'</code></pre>
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost/xls/Products/1/1' -i -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ http GET 'http://localhost/xls' 'Accept:application/json'</code></pre>
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ http GET 'http://localhost/xls/Products/1/1' 'Accept:application/json'</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight nowrap"><code class="language-http" data-lang="http">GET /xls/Products/1/1 HTTP/1.1
+Accept: application/json
+Host: localhost</code></pre>
 </div>
 </div>
 </div>
@@ -497,115 +500,13 @@ X-Application-Context: application:test
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
 Date: Tue, 31 May 2016 13:44:03 GMT
-Content-Length: 124
-
-[ {
-  "cols" : 5,
-  "headers" : [ "SKU", "Description", "Price", "Stock", "Other" ],
-  "name" : "Products",
-  "rows" : 3
-} ]</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="resources-sheet-get">Get Sheet</h3>
-<div class="paragraph">
-<p>Una petición <code>GET</code> sobre una hoja devuelve los metadatos de la hoja</p>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. /xls/{sheet}</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Parameter</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sheet</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">el nombre de la hoja</p></td>
-</tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Path</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">el id de la hoja a usar para siguientes peticiones</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">rows</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">el numero de filas que contiene</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cols</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">el numero de columnas que contiene</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">headers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Array</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">la primera fila de cada sheet contiene los nombres de los campos</p></td>
-</tr>
-</tbody>
-</table>
-<div class="sect3">
-<h4 id="_request_2">Request</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost/xls/Products' -i -H 'Accept: application/json'</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ http GET 'http://localhost/xls/Products' 'Accept:application/json'</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight nowrap"><code class="language-http" data-lang="http">GET /xls/Products HTTP/1.1
-Accept: application/json
-Host: localhost</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_response_2">Response</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Server: Apache-Coyote/1.1
-X-Application-Context: application:test
-Content-Type: application/json;charset=UTF-8
-Transfer-Encoding: chunked
-Date: Tue, 31 May 2016 13:44:03 GMT
-Content-Length: 120
+Content-Length: 68
 
 {
-  "cols" : 5,
-  "headers" : [ "SKU", "Description", "Price", "Stock", "Other" ],
-  "name" : "Products",
-  "rows" : 3
+  "cell" : 1,
+  "name" : "SKU",
+  "row" : 1,
+  "value" : "123.0"
 }</code></pre>
 </div>
 </div>
@@ -616,7 +517,7 @@ Content-Length: 120
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-31 15:27:13 +02:00
+Last updated 2016-05-31 15:09:36 +02:00
 </div>
 </div>
 </body>

@@ -439,25 +439,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_request">Request</a></li>
 <li><a href="#_response">Response</a></li>
-<li><a href="#_body">Body</a></li>
 </ul>
 </li>
 <li><a href="#resources-sheet-get">Get Sheet</a>
 <ul class="sectlevel3">
 <li><a href="#_request_2">Request</a></li>
 <li><a href="#_response_2">Response</a></li>
-<li><a href="#_body_2">Body</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#resources-rows">Rows</a>
 <ul class="sectlevel2">
-<li><a href="#resources-rows-list">List Rows</a>
+<li><a href="#resources-row-get">Get Row</a>
 <ul class="sectlevel3">
 <li><a href="#_request_3">Request</a></li>
 <li><a href="#_response_3">Response</a></li>
-<li><a href="#_body_3">Body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#resources-cols">Cols</a>
+<ul class="sectlevel2">
+<li><a href="#resources-col-get">Get Col</a>
+<ul class="sectlevel3">
+<li><a href="#_request_4">Request</a></li>
+<li><a href="#_response_4">Response</a></li>
 </ul>
 </li>
 </ul>
@@ -618,42 +625,6 @@ con la siguiente estructura:</p>
 <div class="paragraph">
 <p>Una petición <code>GET</code> devuelve la lista de hojas</p>
 </div>
-<div class="sect3">
-<h4 id="_request"><a class="link" href="#_request">Request</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost/xls' -i -H 'Accept: application/json'</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ http GET 'http://localhost/xls' 'Accept:application/json'</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_response"><a class="link" href="#_response">Response</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Server: Apache-Coyote/1.1
-X-Application-Context: application:test
-Content-Type: application/json;charset=UTF-8
-Transfer-Encoding: chunked
-Date: Sat, 28 May 2016 15:45:20 GMT
-Content-Length: 124
-
-[ {
-  "cols" : 5,
-  "headers" : [ "SKU", "Description", "Price", "Stock", "Other" ],
-  "name" : "Products",
-  "rows" : 3
-} ]</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_body"><a class="link" href="#_body">Body</a></h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 33%;">
@@ -690,35 +661,21 @@ Content-Length: 124
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="resources-sheet-get"><a class="link" href="#resources-sheet-get">Get Sheet</a></h3>
-<div class="paragraph">
-<p>Una petición <code>GET</code> sobre una hoja devuelve los metadatos de la hoja</p>
-</div>
 <div class="sect3">
-<h4 id="_request_2"><a class="link" href="#_request_2">Request</a></h4>
+<h4 id="_request"><a class="link" href="#_request">Request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost/xls/Products' -i -H 'Accept: application/json'</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ http GET 'http://localhost/xls/Products' 'Accept:application/json'</code></pre>
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost/xls' -i -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight nowrap"><code class="language-http" data-lang="http">GET /xls/Products HTTP/1.1
-Accept: application/json
-Host: localhost</code></pre>
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ http GET 'http://localhost/xls' 'Accept:application/json'</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_2"><a class="link" href="#_response_2">Response</a></h4>
+<h4 id="_response"><a class="link" href="#_response">Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
@@ -726,20 +683,43 @@ Server: Apache-Coyote/1.1
 X-Application-Context: application:test
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Sat, 28 May 2016 15:45:20 GMT
-Content-Length: 120
+Date: Tue, 31 May 2016 13:44:03 GMT
+Content-Length: 124
 
-{
+[ {
   "cols" : 5,
   "headers" : [ "SKU", "Description", "Price", "Stock", "Other" ],
   "name" : "Products",
   "rows" : 3
-}</code></pre>
+} ]</code></pre>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_body_2"><a class="link" href="#_body_2">Body</a></h4>
+</div>
+<div class="sect2">
+<h3 id="resources-sheet-get"><a class="link" href="#resources-sheet-get">Get Sheet</a></h3>
+<div class="paragraph">
+<p>Una petición <code>GET</code> sobre una hoja devuelve los metadatos de la hoja</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. /xls/{sheet}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sheet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">el nombre de la hoja</p></td>
+</tr>
+</tbody>
+</table>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 33%;">
@@ -776,36 +756,28 @@ Content-Length: 120
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="resources-rows"><a class="link" href="#resources-rows">Rows</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Podemos conocer las filas que contiene una hoja determinada</p>
-</div>
-<div class="sect2">
-<h3 id="resources-rows-list"><a class="link" href="#resources-rows-list">List Rows</a></h3>
-<div class="paragraph">
-<p>Una petición <code>GET</code> devuelve las filas de la hoja</p>
-</div>
 <div class="sect3">
-<h4 id="_request_3"><a class="link" href="#_request_3">Request</a></h4>
+<h4 id="_request_2"><a class="link" href="#_request_2">Request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost/xls/Products/1' -i -H 'Accept: application/json'</code></pre>
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost/xls/Products' -i -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ http GET 'http://localhost/xls/Products/1' 'Accept:application/json'</code></pre>
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ http GET 'http://localhost/xls/Products' 'Accept:application/json'</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight nowrap"><code class="language-http" data-lang="http">GET /xls/Products HTTP/1.1
+Accept: application/json
+Host: localhost</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_3"><a class="link" href="#_response_3">Response</a></h4>
+<h4 id="_response_2"><a class="link" href="#_response_2">Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
@@ -813,40 +785,52 @@ Server: Apache-Coyote/1.1
 X-Application-Context: application:test
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Sat, 28 May 2016 15:45:20 GMT
-Content-Length: 370
+Date: Tue, 31 May 2016 13:44:03 GMT
+Content-Length: 120
 
-[ {
-  "cell" : 1,
-  "name" : "SKU",
-  "row" : 1,
-  "value" : "123.0"
-}, {
-  "cell" : 2,
-  "name" : "Description",
-  "row" : 1,
-  "value" : "a toy"
-}, {
-  "cell" : 3,
-  "name" : "Price",
-  "row" : 1,
-  "value" : "1.1"
-}, {
-  "cell" : 4,
-  "name" : "Stock",
-  "row" : 1,
-  "value" : "1.0"
-}, {
-  "cell" : 5,
-  "name" : "Other",
-  "row" : 1,
-  "value" : "special offer"
-} ]</code></pre>
+{
+  "cols" : 5,
+  "headers" : [ "SKU", "Description", "Price", "Stock", "Other" ],
+  "name" : "Products",
+  "rows" : 3
+}</code></pre>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_body_3"><a class="link" href="#_body_3">Body</a></h4>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-rows"><a class="link" href="#resources-rows">Rows</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="resources-row-get"><a class="link" href="#resources-row-get">Get Row</a></h3>
+<div class="paragraph">
+<p>Una petición <code>GET</code> sobre una fila devuelve las celdas de la misma</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. /xls/{sheet}/{row}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sheet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">el nombre de la hoja</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">row</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">el numero de fila a consultar (la primera contiene la cabecera)</p></td>
+</tr>
+</tbody>
+</table>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 33%;">
@@ -883,6 +867,154 @@ Content-Length: 370
 </tr>
 </tbody>
 </table>
+<div class="sect3">
+<h4 id="_request_3"><a class="link" href="#_request_3">Request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost/xls/Products/1' -i -H 'Accept: application/json'</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ http GET 'http://localhost/xls/Products/1' 'Accept:application/json'</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight nowrap"><code class="language-http" data-lang="http">GET /xls/Products/1 HTTP/1.1
+Accept: application/json
+Host: localhost</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_3"><a class="link" href="#_response_3">Response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+X-Application-Context: application:test
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Tue, 31 May 2016 13:44:03 GMT
+Content-Length: 370
+
+[ {
+  "cell" : 1,
+  "name" : "SKU",
+  "row" : 1,
+  "value" : "123.0"
+}, {
+  "cell" : 2,
+  "name" : "Description",
+  "row" : 1,
+  "value" : "a toy"
+}, {
+  "cell" : 3,
+  "name" : "Price",
+  "row" : 1,
+  "value" : "1.1"
+}, {
+  "cell" : 4,
+  "name" : "Stock",
+  "row" : 1,
+  "value" : "1.0"
+}, {
+  "cell" : 5,
+  "name" : "Other",
+  "row" : 1,
+  "value" : "special offer"
+} ]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-cols"><a class="link" href="#resources-cols">Cols</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="resources-col-get"><a class="link" href="#resources-col-get">Get Col</a></h3>
+<div class="paragraph">
+<p>Una petición <code>GET</code> sobre una fila/columna devuelve el valor de la misma junto con sus metadatos</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">row</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">el id de la fila</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cell</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">el id de la columna</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">el nombre del campo (tomado de la primera fila del excel)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">el valor del campo</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_request_4"><a class="link" href="#_request_4">Request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost/xls/Products/1/1' -i -H 'Accept: application/json'</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ http GET 'http://localhost/xls/Products/1/1' 'Accept:application/json'</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight nowrap"><code class="language-http" data-lang="http">GET /xls/Products/1/1 HTTP/1.1
+Accept: application/json
+Host: localhost</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_4"><a class="link" href="#_response_4">Response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+X-Application-Context: application:test
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Tue, 31 May 2016 13:44:03 GMT
+Content-Length: 68
+
+{
+  "cell" : 1,
+  "name" : "SKU",
+  "row" : 1,
+  "value" : "123.0"
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -890,7 +1022,7 @@ Content-Length: 370
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-27 13:12:43 +02:00
+Last updated 2016-05-31 15:05:53 +02:00
 </div>
 </div>
 </body>
