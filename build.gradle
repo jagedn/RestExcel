@@ -30,7 +30,7 @@ ext {
     grailsVersion = project.grailsVersion
     gradleWrapperVersion = project.gradleWrapperVersion
 
-    springRestdocsVersion = '1.1.0.RC1'
+    springRestdocsVersion = '1.1.0.RELEASE'
     snippetsDir = file('build/generated-snippets')
 }
 
