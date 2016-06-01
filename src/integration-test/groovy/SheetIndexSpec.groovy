@@ -11,20 +11,18 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 @Integration
 class SheetIndexSpec extends BaseSpec{
 
-    FieldDescriptor[] fields = [
-            fieldWithPath('[].name').description('el id de la hoja a usar para siguientes peticiones'),
-            fieldWithPath('[].rows').description('el numero de filas que contiene'),
-            fieldWithPath('[].cols').description('el numero de columnas que contiene'),
-            fieldWithPath('[].headers').description('la primera fila de cada sheet contiene los nombres de los campos'),
-    ]
-
     void "test index"() {
 
         expect:
-        givenRequest(documentBase("index",responseFields(fields)))
-                .get("/xls")
-                .then()
-                .assertThat().statusCode(200)
-
+        givenRequest(
+                documentBase("index",
+                        responseFields(
+                                fieldWithPath('[]').description('Un array de hojas')
+                        ).andWithPrefix('[].',DocuFields.sheetFields)
+                )
+        ).expect()
+            .statusCode(200)
+        .when()
+            .get("/xls")
     }
 }

@@ -19,11 +19,9 @@ class ErrorSpec extends BaseSpec{
 
         expect:
         givenRequest(documentBase("error-example", responseFields(fields)))
-                .when()
-                .port(8080)
+            .expect()
+                .statusCode(404)
+            .when()
                 .get("/xls/seguroquenoexiste")
-                .then()
-                .assertThat().statusCode(404)
-
     }
 }

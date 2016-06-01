@@ -55,6 +55,6 @@ class BaseSpec extends Specification{
         given(documentationSpec)
                 .accept("application/json")
                 .filter(filter)
-                .when()
+                .port(8080)
     }
 }

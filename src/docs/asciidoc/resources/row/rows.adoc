@@ -1,0 +1,34 @@
+[[resources-rows]]
+== Rows
+
+Las filas son expuestas como un subrecurso REST de la hoja que las contiene.
+
+[[resources-row-get]]
+=== Get Row
+
+Una petición `GET` sobre una fila devuelve las celdas de la misma
+
+include::{snippets}/row/path-parameters.adoc[]
+
+include::{snippets}/row/response-fields.adoc[]
+
+==== Request
+
+include::{snippets}/row/curl-request.adoc[]
+
+include::{snippets}/row/httpie-request.adoc[]
+
+include::{snippets}/row/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/row/http-response.adoc[]
+
+[[resources-row-custom-get]]
+=== Custom Get Row
+
+include::{snippets}/row_with_params/path-parameters.adoc[]
+include::{snippets}/row_with_params/request-parameters.adoc[]
+
+include::{snippets}/row_with_params/curl-request.adoc[]
+include::{snippets}/row_with_params/response-fields.adoc[]

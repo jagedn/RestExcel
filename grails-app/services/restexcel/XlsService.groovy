@@ -28,6 +28,17 @@ class XlsService {
         sheets
     }
 
+    public List<List<CellBean>>getRow( String sheetName, int rowNumber, int maxRows) {
+
+        List<List<CellBean>> ret = []
+        maxRows.times {
+           def row = getRow(sheetName, rowNumber+it)
+            if( row )
+                ret.add(row)
+        }
+        ret
+    }
+
     public List<CellBean>getRow( String sheetName, int rowNumber){
         if( rowNumber < 1 )
             return null

@@ -1,0 +1,22 @@
+[[resources-cols]]
+== Cols
+
+[[resources-col-get]]
+=== Get Col
+
+Una petición `GET` sobre una fila/columna devuelve el valor de la misma junto con sus metadatos
+
+include::{snippets}/cels/response-fields.adoc[]
+
+==== Request
+
+include::{snippets}/cels/curl-request.adoc[]
+
+include::{snippets}/cels/httpie-request.adoc[]
+
+include::{snippets}/cels/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/cels/http-response.adoc[]
+

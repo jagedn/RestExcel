@@ -3,27 +3,31 @@
  */
 import grails.test.mixin.integration.Integration
 import org.springframework.restdocs.payload.FieldDescriptor
+import org.springframework.restdocs.request.ParameterDescriptor
 
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters
 
 @Integration
 class SheetGetSpec extends BaseSpec{
 
-    FieldDescriptor[] fields = [
-            fieldWithPath('name').description('el id de la hoja a usar para siguientes peticiones'),
-            fieldWithPath('rows').description('el numero de filas que contiene'),
-            fieldWithPath('cols').description('el numero de columnas que contiene'),
-            fieldWithPath('headers').description('la primera fila de cada sheet contiene los nombres de los campos'),
+    ParameterDescriptor[]parameters = [
+            parameterWithName('sheet').description('el nombre de la hoja')
     ]
 
-    void "get first row"() {
+    void "get sheet"() {
 
         expect:
-        givenRequest(documentBase("sheet",responseFields(fields)))
-                .get("/xls/Products")
-                .then()
-                .assertThat().statusCode(200)
-
+        givenRequest(
+                documentBase("sheet",
+                        responseFields(DocuFields.sheetFields),
+                        pathParameters(parameters) ))
+            .pathParam('sheet','Products')
+            .expect()
+                .statusCode(200)
+            .when()
+                .get("/xls/{sheet}")
     }
 }

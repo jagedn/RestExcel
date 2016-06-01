@@ -1,12 +1,14 @@
 [[resources-aggregates]]
 == Sheets
 
-Podemos conocer las hojas que contiene un Excel
+Cada hoja del excel es ofrecida como un recurso REST donde su Id es el nombre de la hoja.
 
 [[resources-aggregate-list]]
 === List Sheets
 
 Una petición `GET` devuelve la lista de hojas
+
+include::{snippets}/index/response-fields.adoc[]
 
 ==== Request
 
@@ -18,15 +20,15 @@ include::{snippets}/index/httpie-request.adoc[]
 
 include::{snippets}/index/http-response.adoc[]
 
-==== Body
-
-include::{snippets}/index/response-fields.adoc[]
-
 
 [[resources-sheet-get]]
 === Get Sheet
 
 Una petición `GET` sobre una hoja devuelve los metadatos de la hoja
+
+include::{snippets}/sheet/path-parameters.adoc[]
+
+include::{snippets}/sheet/response-fields.adoc[]
 
 ==== Request
 
@@ -36,10 +38,8 @@ include::{snippets}/sheet/httpie-request.adoc[]
 
 include::{snippets}/sheet/http-request.adoc[]
 
+
 ==== Response
 
 include::{snippets}/sheet/http-response.adoc[]
 
-==== Body
-
-include::{snippets}/sheet/response-fields.adoc[]

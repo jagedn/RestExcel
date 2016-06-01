@@ -1,5 +1,6 @@
 package restexcel
 
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 /**
@@ -16,7 +17,6 @@ class XlsController {
     XlsService xlsService
 
     def index() {
-
         if(!params.sheet) {
             respond xlsService.sheets
             return
@@ -28,7 +28,12 @@ class XlsController {
         }
 
         if( !params.col ) {
-            respond xlsService.getRow(params.sheet, params.row as int)
+            if( params.max ) {
+                def ret = xlsService.getRow(params.sheet, params.row as int, params.max as int)
+                println ret as JSON
+                respond ret
+            }else
+                respond xlsService.getRow(params.sheet, params.row as int)
             return
         }
 
