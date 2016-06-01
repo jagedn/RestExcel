@@ -431,7 +431,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="resources-aggregates">Sheets</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Podemos conocer las hojas que contiene un Excel</p>
+<p>Cada hoja del excel es ofrecida como un recurso REST donde su Id es el nombre de la hoja.</p>
 </div>
 <div class="sect2">
 <h3 id="resources-aggregate-list">List Sheets</h3>
@@ -452,6 +452,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Un array de hojas</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">[].name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
@@ -496,7 +501,7 @@ Server: Apache-Coyote/1.1
 X-Application-Context: application:test
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Tue, 31 May 2016 13:44:03 GMT
+Date: Wed, 01 Jun 2016 13:19:58 GMT
 Content-Length: 124
 
 [ {
@@ -598,7 +603,7 @@ Server: Apache-Coyote/1.1
 X-Application-Context: application:test
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Tue, 31 May 2016 13:44:03 GMT
+Date: Wed, 01 Jun 2016 13:19:58 GMT
 Content-Length: 120
 
 {
@@ -616,7 +621,7 @@ Content-Length: 120
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-31 15:27:13 +02:00
+Last updated 2016-06-01 12:26:01 +02:00
 </div>
 </div>
 </body>
